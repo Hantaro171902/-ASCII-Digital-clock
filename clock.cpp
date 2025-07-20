@@ -12,19 +12,6 @@
 
 using namespace std;
 
-// Box drawing characters
-const char SYMBOL_HORIZONTAL[]   = "\u2500"; // ─
-const char SYMBOL_VERTICAL[]     = "\u2502"; // │
-const char SYMBOL_TOP_LEFT[]     = "\u250C"; // ┌
-const char SYMBOL_TOP_RIGHT[]    = "\u2510"; // ┐
-const char SYMBOL_BOTTOM_LEFT[]  = "\u2514"; // └
-const char SYMBOL_BOTTOM_RIGHT[] = "\u2518"; // ┘
-const char SYMBOL_T_LEFT[]       = "\u251C"; // ├
-const char SYMBOL_T_RIGHT[]      = "\u2524"; // ┤
-const char SYMBOL_T_TOP[]        = "\u252C"; // ┬
-const char SYMBOL_T_BOTTOM[]     = "\u2534"; // ┴
-const char SYMBOL_INTERSECT[]    = "\u253C"; // ┼
-
 
 // Double line box drawing characters
 const char SYMBOL_DOUBLE_HORIZONTAL[]   = "\u2550"; // ═
@@ -47,6 +34,11 @@ const char BLOCK_HALF[]   = "\u2592"; // ▒
 #define RED     "\033[91m"
 #define GREEN   "\033[92m"
 #define BLUE    "\033[94m"
+#define YELLOW  "\033[93m"
+#define MAGENTA "\033[95m"
+#define CYAN    "\033[96m"
+#define WHITE   "\033[97m"
+#define BLACK   "\033[90m"
 #define RESET   "\033[0m"
 
 const int FONT_HEIGHT = 8;
@@ -236,7 +228,7 @@ void print_ascii_clock(const string& time_str, bool blink_colon) {
             }
 
             if (index != -1) {
-                string color = (i < 2) ? RED : (i < 5 ? GREEN : BLUE);
+                string color = (i < 2) ? WHITE : (i < 5 ? WHITE : WHITE);
                 cout << color << FONT[index * FONT_HEIGHT + line] << RESET;
             } else {
                 cout << string(char_width, ' '); // fallback, shouldn't happen
@@ -261,7 +253,7 @@ int main() {
     atexit(reset_terminal);
     hide_cursor();
 
-    bool blink = true;
+    bool blink = false;
 
     while (!exit_requested) {
         string now = current_time();
